@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestContainersSampleProject", "TestContainersSampleProject\TestContainersSampleProject.csproj", "{D7A7AA8B-456B-4909-9E7B-CF831C416DA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestContainerSampleProject.StudentService.Tests", "TestContainerSampleProject.StudentService.Tests\TestContainerSampleProject.StudentService.Tests.csproj", "{F5875061-286C-41F7-9181-F380B429AAF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7A7AA8B-456B-4909-9E7B-CF831C416DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7A7AA8B-456B-4909-9E7B-CF831C416DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7A7AA8B-456B-4909-9E7B-CF831C416DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7A7AA8B-456B-4909-9E7B-CF831C416DA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5875061-286C-41F7-9181-F380B429AAF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5875061-286C-41F7-9181-F380B429AAF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5875061-286C-41F7-9181-F380B429AAF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5875061-286C-41F7-9181-F380B429AAF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2FA25A8-29B8-4DDF-BAFC-8928F36992B1}
+	EndGlobalSection
+EndGlobal

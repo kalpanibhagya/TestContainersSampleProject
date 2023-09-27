@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  cassandra:
+    image: new-image
+    container_name: new-container-student
+    ports:
+      - 9042:9042
+    volumes:
+      - C:/Users/KalpaniR/Documents/backup/student:/var/lib/cassandra
