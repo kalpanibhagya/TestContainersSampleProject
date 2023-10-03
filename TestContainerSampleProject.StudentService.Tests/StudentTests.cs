@@ -5,10 +5,11 @@ namespace TestContainerSampleProject.StudentService.Tests
         private Cluster? _cluster;
         private ISession? _session;
         private readonly IContainer _container = new ContainerBuilder()
-            .WithImage("new-image")
+            .WithImage("cassandra:latest")
             .WithName("cassandra-testing-student")
             .WithPortBinding(9042, false)
-            .WithBindMount("C:\\Users\\KalpaniR\\Documents\\backup\\student", "/var/lib/cassandra")
+            .WithResourceMapping(new DirectoryInfo("C:\\Users\\KalpaniR\\Documents\\backup\\student"), "/var/lib/cassandra")
+            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(9042))
             .Build();
 
         public Task InitializeAsync()
@@ -28,9 +29,6 @@ namespace TestContainerSampleProject.StudentService.Tests
                 _cluster = Cluster.Builder()
                     .AddContactPoint(_container.Hostname)
                     .Build();
-
-                const int startupDelayMs = 60000; // delay
-                Thread.Sleep(startupDelayMs);
 
                 _session = _cluster.Connect();
                 return true;
@@ -74,11 +72,22 @@ namespace TestContainerSampleProject.StudentService.Tests
         }
 
         [Fact]
-        public void TestStudentListAllStudents()
+        public void TestStudentListAllStudents() //run this after student creation test
         {
             if (CreateConnection())
             {
                 var studentService = new TestContainersSampleProject.StudentService(_session);
+                var student = new Student
+                {
+                    FirstName = "John",
+                    LastName = "Doe",
+                    Age = 25
+                };
+
+                // Act: Call the CreateStudent method
+                studentService.CreateStudent(student);
+
+
                 var studentList = studentService.GetAllStudents().ToList();
 
                 Assert.True(studentList.Count != 0);
@@ -96,15 +105,28 @@ namespace TestContainerSampleProject.StudentService.Tests
             if (CreateConnection())
             {
                 var studentService = new TestContainersSampleProject.StudentService(_session);
-                var studentList = studentService.GetAllStudents().ToList();
                 var student = new Student
+                {
+                    FirstName = "John",
+                    LastName = "Doe",
+                    Age = 25
+                };
+
+                // Act: Call the CreateStudent method
+                studentService.CreateStudent(student);
+
+                var studentList = studentService.GetAllStudents().ToList();
+                student = new Student
                 {
                     StudentId = studentList[0].StudentId,
                     FirstName = "Jane",
                     LastName = "Doe",
                     Age = 28
                 };
-                Assert.True(studentService.UpdateStudent(student));
+
+                studentService.UpdateStudent(student);
+                var retrievedStudent = studentService.GetStudent(student.StudentId);
+                Assert.True(retrievedStudent.FirstName == "Jane");
             }
             else
             {
